@@ -5,7 +5,7 @@ action and fragment caching.
 
 ==Usage
 
-In your +config/environments/test.rb+:
+In your <tt>config/environments/test.rb</tt>:
 
   require 'banker'
 
@@ -46,12 +46,12 @@ These take a +url_for+-style Hash argument.
 
 Should macros are provided for the most common assertions:
 
-- +should_cache_page(description, &block)+
-- +should_expire_page(description, &block)+
-- +should_cache_action(description, action)+
-- +should_expire_action(description, action)+
-- +should_cache_fragment(description, key)+
-- +should_expire_fragment(description, key)+
+- <tt>should_cache_page(description, &block)</tt>
+- <tt>should_expire_page(description, &block)</tt>
+- <tt>should_cache_action(description, action)</tt>
+- <tt>should_expire_action(description, action)</tt>
+- <tt>should_cache_fragment(description, key)</tt>
+- <tt>should_expire_fragment(description, key)</tt>
 
 The action and fragment macros take an +action+ or +key+ argument in the same
 form as the action and fragment assertions. The page macros, like
@@ -64,8 +64,12 @@ so that it is evaluated in the context of the test instance:
 
 It is sometimes useful to expire a cache from outside the context of a normal
 HTTP request, but Rails does not make this straightforward. See
-http://lightyearsoftware.com/blog/2009/09/running-sweepers-from-a-model/
+http://lightyearsoftware.com/blog/2009/09/running-sweepers-from-a-model
 for details.
+
+==To Do
+
+- Unit tests
 
 ==Author
 
