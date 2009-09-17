@@ -1,0 +1,76 @@
+=Banker
+
+Banker is a Rails plug-in to make it easy to test your application's page,
+action and fragment caching.
+
+==Usage
+
+In your +config/environments/test.rb+:
+
+  require 'banker'
+
+In your functional tests:
+
+  assert_page_cached '/some-url'
+  assert_action_cached :index
+  assert_fragment_cached :controller => 'pages', :action => 'index', :part => 'fragment'
+
+===Page Caching/Expiration Assertions
+
+These take a +url_for+-style Hash argument, a named route or a plain string.
+
+- +assert_page_cached+
+- +assert_page_not_cached+
+- +assert_page_expired+
+- +assert_page_not_expired+
+
+===Action Caching/Expiration Assertions
+
+These take an action name (String or Symbol) as an argument.
+
+- +assert_action_cached+
+- +assert_action_not_cached+
+- +assert_action_expired+
+- +assert_action_not_expired+
+
+===Fragment Caching/Expiration Assertions
+
+These take a +url_for+-style Hash argument.
+
+- +assert_fragment_cached+
+- +assert_fragment_not_cached+
+- +assert_fragment_expired+
+- +assert_fragment_not_expired+
+
+==Shoulda Macros
+
+Should macros are provided for the most common assertions:
+
+- +should_cache_page(description, &block)+
+- +should_expire_page(description, &block)+
+- +should_cache_action(description, action)+
+- +should_expire_action(description, action)+
+- +should_cache_fragment(description, key)+
+- +should_expire_fragment(description, key)+
+
+The action and fragment macros take an +action+ or +key+ argument in the same
+form as the action and fragment assertions. The page macros, like
++should_redirect_to+, require that a named route be passed in a block,
+so that it is evaluated in the context of the test instance:
+
+  should_cache_page('home') { root_path }
+
+==Expiring a Cache from a Model or Script
+
+It is sometimes useful to expire a cache from outside the context of a normal
+HTTP request, but Rails does not make this straightforward. See
+http://lightyearsoftware.com/blog/2009/09/running-sweepers-from-a-model/
+for details.
+
+==Author
+
+Steve Madsen <steve@lightyearsoftware.com>
+
+Copyright (c) 2009 Light Year Software, LLC
+
+Released under the MIT license, see MIT-LICENSE for details.
