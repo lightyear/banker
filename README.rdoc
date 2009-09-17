@@ -7,6 +7,7 @@ action and fragment caching.
 
 In your <tt>config/environments/test.rb</tt>:
 
+  config.action_controller.perform_caching = true
   require 'banker'
 
 In your functional tests:
