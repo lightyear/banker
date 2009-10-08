@@ -1,9 +1,19 @@
 =Banker
 
 Banker is a Rails plug-in to make it easy to test your application's page,
-action and fragment caching.
+action and fragment caching, and add more functionality to
+ActionView::Helpers::CacheHelper.
 
-==Usage
+==ActionView::Helpers::CacheHelper Additions
+
+Presently, there is one new method added to ActionView::Helpers::CacheHelper.
+
+- <tt>conditionally_cache(expression, name, &block)</tt>: works much like
+  <tt>cache</tt>, except <tt>expression</tt> is evaluated first. When true,
+  control is passed to <tt>cache</tt> as usual, but when false, the block is
+  captured and output without caching anything.
+
+==Test Usage
 
 In your <tt>config/environments/test.rb</tt>:
 
@@ -48,11 +58,17 @@ These take a +url_for+-style Hash argument.
 Should macros are provided for the most common assertions:
 
 - <tt>should_cache_page(description, &block)</tt>
+- <tt>should_not_cache_page(description, &block)</tt>
 - <tt>should_expire_page(description, &block)</tt>
+- <tt>should_not_expire_page(description, &block)</tt>
 - <tt>should_cache_action(description, action)</tt>
+- <tt>should_not_cache_action(description, action)</tt>
 - <tt>should_expire_action(description, action)</tt>
+- <tt>should_not_expire_action(description, action)</tt>
 - <tt>should_cache_fragment(description, key)</tt>
+- <tt>should_not_cache_fragment(description, key)</tt>
 - <tt>should_expire_fragment(description, key)</tt>
+- <tt>should_not_expire_fragment(description, key)</tt>
 
 The action and fragment macros take an +action+ or +key+ argument in the same
 form as the action and fragment assertions. The page macros, like
