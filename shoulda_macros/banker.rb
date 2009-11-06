@@ -40,38 +40,42 @@ module Banker
       end
     end
     
-    def should_expire_action(description, key)
+    def should_expire_action(description, action)
       should "expire #{description} action" do
         assert_action_expired(action)
       end
     end
     
-    def should_not_expire_action(description, key)
+    def should_not_expire_action(description, action)
       should "not expire #{description} action" do
         assert_action_not_expired(action)
       end
     end
     
-    def should_cache_fragment(description, key)
+    def should_cache_fragment(description, key = nil, &block)
       should "cache #{description}" do
+        key = instance_eval(&block) if block_given?
         assert_fragment_cached(key)
       end
     end
     
-    def should_not_cache_fragment(description, key)
+    def should_not_cache_fragment(description, key = nil, &block)
       should "not cache #{description}" do
+        key = instance_eval(&block) if block_given?
         assert_fragment_not_cached(key)
       end
     end
     
-    def should_expire_fragment(description, key)
+    def should_expire_fragment(description, key = nil, &block)
       should "expire #{description}" do
+        key = instance_eval(&block) if block_given?
         assert_fragment_expired(key)
       end
     end
     
-    def should_not_expire_fragment(description, key)
+    def should_not_expire_fragment(description, key = nil, &block)
       should "not expire #{description}" do
+        key = instance_eval(&block) if block_given?
         assert_fragment_not_expired(key)
       end
     end

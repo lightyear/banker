@@ -64,17 +64,21 @@ Should macros are provided for the most common assertions:
 - <tt>should_not_cache_action(description, action)</tt>
 - <tt>should_expire_action(description, action)</tt>
 - <tt>should_not_expire_action(description, action)</tt>
-- <tt>should_cache_fragment(description, key)</tt>
-- <tt>should_not_cache_fragment(description, key)</tt>
-- <tt>should_expire_fragment(description, key)</tt>
-- <tt>should_not_expire_fragment(description, key)</tt>
+- <tt>should_cache_fragment(description, key, &block)</tt>
+- <tt>should_not_cache_fragment(description, key, &block)</tt>
+- <tt>should_expire_fragment(description, key, &block)</tt>
+- <tt>should_not_expire_fragment(description, key, &block)</tt>
 
-The action and fragment macros take an +action+ or +key+ argument in the same
-form as the action and fragment assertions. The page macros, like
-+should_redirect_to+, require that a named route be passed in a block,
-so that it is evaluated in the context of the test instance:
+The action macros take an +action+ argument in the same form as the action
+and fragment assertions. The page macros, like +should_redirect_to+,
+require that a named route be passed in a block, so that it is evaluated
+in the context of the test instance:
 
   should_cache_page('home') { root_path }
+
+The fragment macros will work either way: pass +key+ if the name of your
+fragment is a literal or supply it with a block if you need to construct
+the key using variables only available in the context of the test instance.
 
 ==Expiring a Cache from a Model or Script
 
